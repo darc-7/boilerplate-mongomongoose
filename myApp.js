@@ -9,10 +9,15 @@ const personSchema = new mongoose.Schema({
   favoriteFoods: [{type: String}]
 });
 
-const Person = mongoose.model('Person',personSchema);
+var Person = mongoose.model('Person',personSchema);
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  var johnDoe = new Person({name: "John Doe",age: 35,favoriteFoods:["ramen","pizza","tacos"]});
+  
+  johnDoe.save(function(err, data) {
+    if (err) return console.error(err);
+    done(null, data);
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
